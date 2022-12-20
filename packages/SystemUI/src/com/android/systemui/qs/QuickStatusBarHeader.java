@@ -475,14 +475,12 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
         mStatusBarPaddingEnd = resources.getDimensionPixelSize(
                 R.dimen.status_bar_left_clock_end_padding);
 
-        int qsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(mContext);
+        //int qsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(mContext);
 
-        mDatePrivacyView.getLayoutParams().height =
-                Math.max(qsOffsetHeight, mDatePrivacyView.getMinimumHeight());
+        mDatePrivacyView.getLayoutParams().height = statusBarHeight;
         mDatePrivacyView.setLayoutParams(mDatePrivacyView.getLayoutParams());
 
-        mStatusIconsView.getLayoutParams().height =
-                Math.max(qsOffsetHeight, mStatusIconsView.getMinimumHeight());
+        mStatusIconsView.getLayoutParams().height = statusBarHeight;
         mStatusIconsView.setLayoutParams(mStatusIconsView.getLayoutParams());
 
         ViewGroup.LayoutParams lp = getLayoutParams();
@@ -517,7 +515,7 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
 
         MarginLayoutParams qqsLP = (MarginLayoutParams) mHeaderQsPanel.getLayoutParams();
         qqsLP.topMargin = largeScreenHeaderActive || !mUseCombinedQSHeader ? mContext.getResources()
-                .getDimensionPixelSize(R.dimen.qqs_layout_margin_top) : qsOffsetHeight;
+                .getDimensionPixelSize(R.dimen.qqs_layout_margin_top) : SystemBarUtils.getQuickQsOffsetHeight(mContext);
         mHeaderQsPanel.setLayoutParams(qqsLP);
 
         updateHeadersPadding();
@@ -574,9 +572,9 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
                 .addFloat(mDateContainer, "alpha", 0, 1)
                 // Use statusbar paddings when collapsed,
                 // align with QS when expanded, and animate translation
-                .addFloat(mClockContainer, "translationX",
+                .addFloat(isLayoutRtl() ? mRightLayout : mClockContainer, "translationX",
                     mHeaderPaddingLeft + mStatusBarPaddingEnd, mHeaderPaddingLeft + mStatusBarPaddingEnd)
-                .addFloat(mRightLayout, "translationX",
+                .addFloat(isLayoutRtl() ? mClockContainer: mRightLayout, "translationX",
                     -(mHeaderPaddingRight + mStatusBarPaddingEnd), 0)
                 .addFloat(mDateContainer, "translationX",
                     mHeaderPaddingLeft + mStatusBarPaddingEnd, 0)
@@ -593,9 +591,11 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
 
                     @Override
                     public void onAnimationStarted() {
+		    if (mShowDate) {
                         mClockView.setVisibility(mAnimationAtEndReached ? View.VISIBLE : View.GONE);
                         mClockCustomView.setVisibility(View.VISIBLE);
                         mClockDateView.setFreezeSwitching(true);
+		    }
                         setSeparatorVisibility(false);
                         if (!mIsSingleCarrier) {
                             mIconContainer.addIgnoredSlots(mRssiIgnoredSlots);
@@ -606,9 +606,11 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
                     @Override
                     public void onAnimationAtStart() {
                         super.onAnimationAtStart();
+                    if (mShowDate) {
                         mClockView.setVisibility(View.VISIBLE);
                         mClockDateView.setFreezeSwitching(false);
                         mClockCustomView.setVisibility(View.VISIBLE);
+		    }
                         setSeparatorVisibility(mShowClockIconsSeparator);
                         // In QQS we never ignore RSSI.
                         mIconContainer.removeIgnoredSlots(mRssiIgnoredSlots);
