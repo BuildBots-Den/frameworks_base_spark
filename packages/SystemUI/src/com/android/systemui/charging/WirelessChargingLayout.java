@@ -174,7 +174,7 @@ final class WirelessChargingLayout extends FrameLayout {
                 R.attr.wallpaperTextColorAccent).getDefaultColor();
         if (mRippleView.getRippleShape() == RippleShape.ROUNDED_BOX) {
             mRippleView.setDuration(ROUNDED_BOX_RIPPLE_ANIMATION_DURATION);
-            mRippleView.setSparkleStrength(0.22f);
+            mRippleView.setSparkleStrength(0.4f);
             mRippleView.setColor(color, 28);
         } else {
             mRippleView.setDuration(CIRCLE_RIPPLE_ANIMATION_DURATION);
