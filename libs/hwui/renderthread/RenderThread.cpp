@@ -44,6 +44,8 @@
 #include "renderstate/RenderState.h"
 #include "utils/TimeUtils.h"
 
+#include <processgroup/sched_policy.h>
+
 namespace android {
 namespace uirenderer {
 namespace renderthread {
