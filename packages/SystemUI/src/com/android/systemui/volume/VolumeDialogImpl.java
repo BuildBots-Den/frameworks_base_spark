@@ -196,7 +196,6 @@ public class VolumeDialogImpl implements VolumeDialog,
     private int mDialogCornerRadius;
     private int mRingerDrawerItemSize;
     private int mRingerRowsPadding;
-    private int mTargetTapSize;
     private boolean mShowVibrate;
     private int mRingerCount;
     private final boolean mShowLowMediaVolumeIcon;
@@ -741,8 +740,6 @@ public class VolumeDialogImpl implements VolumeDialog,
                 R.dimen.volume_ringer_drawer_item_size);
         mRingerRowsPadding = mContext.getResources().getDimensionPixelSize(
                 R.dimen.volume_dialog_ringer_rows_padding);
-	mTargetTapSize = mContext.getResources().getDimensionPixelSize(
-                R.dimen.volume_dialog_tap_target_size);
         mShowVibrate = mController.hasVibrator();
 
         // Normal, mute, and possibly vibrate.
@@ -1368,29 +1365,6 @@ public class VolumeDialogImpl implements VolumeDialog,
                 Dependency.get(ActivityStarter.class).startActivity(intent,
                         true /* dismissShade */);
             });
-            Drawable icon = mAppVolumeActivePackageName != null ?
-                    getApplicationIcon(mAppVolumeActivePackageName) : null;
-            if (icon != null) {
-                mAppVolumeIcon.setImageTintList(null);
-                mAppVolumeIcon.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                mAppVolumeIcon.setImageDrawable(icon);
-                mAppVolumeIcon.getLayoutParams().height = mTargetTapSize;
-                mAppVolumeIcon.getLayoutParams().width = mTargetTapSize;
-                mAppVolumeIcon.requestLayout();
-                mAppVolumeIcon.setPadding(
-                        mAppVolumeView.getPaddingLeft(),
-                        mAppVolumeView.getPaddingTop(),
-                        mAppVolumeView.getPaddingRight(),
-                        mRingerRowsPadding);
-            	mAppVolumeIcon.setOutlineProvider(new ViewOutlineProvider() {
-                    @Override
-                    public void getOutline(View view, Outline outline) {
-                    	outline.setRoundRect(
-                            	0, 0, view.getWidth(), view.getHeight(), mDialogCornerRadius);
-                    }
-            	});
-            	mAppVolumeIcon.setClipToOutline(true);
-            }
         }
     }
 
