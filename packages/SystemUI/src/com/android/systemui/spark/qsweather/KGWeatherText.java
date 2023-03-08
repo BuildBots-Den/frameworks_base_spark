@@ -158,7 +158,7 @@ public class KGWeatherText extends TextView implements
                             } else if (formattedCondition.toLowerCase().contains("rain")) {
                               formattedCondition = "Rainy";
                             } else if (formattedCondition.toLowerCase().contains("clear")) {
-                              formattedCondition = "Sunny";
+                              formattedCondition = "Clear";
                             } else if (formattedCondition.toLowerCase().contains("storm")) {
                               formattedCondition = "Stormy";
                             } else if (formattedCondition.toLowerCase().contains("snow")) {
