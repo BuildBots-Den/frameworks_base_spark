@@ -924,8 +924,8 @@ public class RippleDrawable extends LayerDrawable {
         for (int i = 0; i < mRunningAnimations.size(); i++) {
             RippleAnimationSession s = mRunningAnimations.get(i);
             if (!canvas.isHardwareAccelerated()) {
-                Log.e(TAG, "The RippleDrawable.STYLE_PATTERNED animation is not supported for a "
-                        + "non-hardware accelerated Canvas. Skipping animation.");
+                //Log.e(TAG, "The RippleDrawable.STYLE_PATTERNED animation is not supported for a "
+                       // + "non-hardware accelerated Canvas. Skipping animation.");
                 break;
             } else if (useCanvasProps) {
                 RippleAnimationSession.AnimationProperties<CanvasProperty<Float>,
