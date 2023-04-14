@@ -302,7 +302,11 @@ public class InternetDialogController implements AccessPointController.AccessPoi
         mInternetTelephonyCallback = new InternetTelephonyCallback();
         mTelephonyManager.registerTelephonyCallback(mExecutor, mInternetTelephonyCallback);
         // Listen the connectivity changes
-        mConnectivityManager.registerDefaultNetworkCallback(mConnectivityManagerNetworkCallback);
+        try {
+            mConnectivityManager.registerDefaultNetworkCallback(mConnectivityManagerNetworkCallback);
+        } catch (Exception e) {
+            // Do nothing
+        }
         mCanConfigWifi = canConfigWifi;
         scanWifiAccessPoints();
     }
