@@ -156,11 +156,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private final Executor mMainExecutor;
     private final DumpManager mDumpManager;
     private ClockController mClockController;
-    private boolean mShowSBClockBg;
     private boolean mHideNotificationIcons;
     private BatteryMeterView mBatteryMeterView;
+
     private StatusIconContainer mStatusIcons;
     private int mSignalClusterEndPadding = 0;
+    private int mShowSBClockBg;
 
     private LyricController mLyricController;
 
@@ -428,7 +429,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         switch (key) {
             case STATUSBAR_CLOCK_CHIP:
                 mShowSBClockBg = 
-                        TunerService.parseIntegerSwitch(newValue, false);
+                        TunerService.parseInteger(newValue, 0);
                 updateStatusBarClock();
                 break;
             case STATUS_BAR_SHOW_LYRIC:
@@ -447,12 +448,14 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     private void updateStatusBarClock() {
-        if (mShowSBClockBg) {
-            mClockView.setBackgroundResource(R.drawable.sb_date_bg);
+        if (mShowSBClockBg != 0) {
+            String chipStyleUri = "sb_date_bg" + String.valueOf(mShowSBClockBg);
+            int resId = getContext().getResources().getIdentifier(chipStyleUri, "drawable", "com.android.systemui");
+            mClockView.setBackgroundResource(resId);
             mClockView.setPadding(10,2,10,2);
-            mCenterClockView.setBackgroundResource(R.drawable.sb_date_bg);
+            mCenterClockView.setBackgroundResource(resId);
             mCenterClockView.setPadding(10,2,10,2);
-            mRightClockView.setBackgroundResource(R.drawable.sb_date_bg);
+            mRightClockView.setBackgroundResource(resId);
             mRightClockView.setPadding(10,2,10,2);
         } else {
             int clockPaddingStart = getResources().getDimensionPixelSize(
