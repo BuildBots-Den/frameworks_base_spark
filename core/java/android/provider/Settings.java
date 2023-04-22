@@ -5690,7 +5690,13 @@ public final class Settings {
          * Whether to show heads up only for dialer and sms apps
          * @hide
          */
+
         public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
+
+        /**
+         * @hide
+         */
+         public static final String QS_UI_STYLE = "qs_ui_style";       
 
 	/**
          * Adaptive playback

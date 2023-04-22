@@ -23,8 +23,9 @@ import android.annotation.SuppressLint
 import android.app.compat.ChangeIdStateCache.invalidate
 import android.content.Context
 import android.graphics.Canvas
-import android.os.UserHandle;
-import android.provider.Settings;
+import android.os.UserHandle
+import android.provider.Settings
+import android.graphics.Rect
 import android.text.Layout
 import android.text.TextUtils
 import android.text.format.DateFormat
