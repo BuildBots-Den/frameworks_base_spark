@@ -216,7 +216,6 @@ open class QSTileViewImpl @JvmOverloads constructor(
 
     init {
         setId(generateViewId())
-        vertical = QSLayoutUtils.getQSTileVerticalLayout(context)
         if (isA11Style) {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
@@ -302,7 +301,6 @@ open class QSTileViewImpl @JvmOverloads constructor(
             width = iconSize
         }
 
-        vertical = QSLayoutUtils.getQSTileVerticalLayout(context)
         if (isA11Style) {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER

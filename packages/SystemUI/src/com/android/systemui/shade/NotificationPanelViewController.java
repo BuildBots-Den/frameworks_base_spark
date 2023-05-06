@@ -4972,12 +4972,12 @@ public final class NotificationPanelViewController extends PanelViewController i
                 mView.setAccessibilityPaneTitle(determineAccessibilityPaneTitle());
             }
             mNotificationStackScrollLayoutController.setMaxTopPadding(mQsMaxExpansionHeight);
-        }
         if (mIsA11Style) {
             float qsExpansionFraction = computeQsExpansionFraction();
             int qsPanelBottomY = calculateQsBottomPosition(qsExpansionFraction);
             mScrimController.setQsPosition(qsExpansionFraction, qsPanelBottomY);
         }
+      }
     }
 
     private class ConfigurationListener implements ConfigurationController.ConfigurationListener {
