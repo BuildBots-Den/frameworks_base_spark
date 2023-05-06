@@ -30,7 +30,7 @@ import android.widget.FrameLayout;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
 import com.android.systemui.qs.customize.QSCustomizer;
-import com.android.internal.util.systemui.qs.QSLayoutUtils;
+import com.android.systemui.qs.TileUtils;
 
 import java.io.PrintWriter;
 
